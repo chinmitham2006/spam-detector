@@ -1,102 +1,102 @@
 # 📩 SMS Spam Detector
 
-A machine learning project that classifies SMS messages as **spam** or **ham (not spam)** using TF-IDF features and classical ML models, with a Streamlit web app for live predictions.
+A machine learning project that classifies SMS messages as **Spam** or **Ham (Not Spam)** using TF-IDF features and classical machine learning models, with a Streamlit web application for real-time predictions.
 
-> 🚧 **Status:** In progress (Week 1 of 3) — update this as you go!
-
-<!-- Add a screenshot or GIF of your app here in Week 3 -->
-<!-- ![Demo](images/demo.gif) -->
+**Status: Completed ✅**
 
 ---
 
-## 📌 Problem Statement
+## 🎯 Problem Statement
 
-Spam messages waste time and can be used for scams and phishing. The goal of this project is to build a model that automatically detects spam SMS messages with high precision and recall.
+Spam messages can waste time and may contain unwanted advertisements, scams, or misleading content.
+
+The goal of this project is to build a machine learning system that can automatically classify SMS messages as:
+
+- 🟢 **Ham** — legitimate message
+- 🔴 **Spam** — unwanted or promotional message
+
+The trained model is integrated into a Streamlit web application where users can enter a message and receive a prediction.
+
+---
 
 ## 📊 Dataset
 
-- **Name:** SMS Spam Collection
-- **Source:** [Kaggle](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset) / [UCI ML Repository](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
-- **Size:** ~5,500 messages (~87% ham, ~13% spam)
-- **Note:** The dataset is *imbalanced*, so accuracy alone is not a good metric — this project focuses on precision, recall and F1-score.
+The project uses the **SMS Spam Collection** dataset.
+
+- Total messages: **5,572**
+- Ham messages: **4,825**
+- Spam messages: **747**
+- The dataset contains more ham messages than spam messages, making it an imbalanced classification problem.
+- After cleaning and removing duplicate cleaned messages, **5,084 messages** remained.
+
+---
 
 ## 🛠️ Tech Stack
 
-- Python 3.9+
-- pandas, NumPy
-- scikit-learn
-- NLTK
-- Matplotlib / Seaborn
-- Streamlit (for the web app)
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- TF-IDF
+- Naive Bayes
+- Logistic Regression
+- Linear SVM
+- GridSearchCV
+- Joblib
+- Streamlit
+- Jupyter Notebook
 
-## 📁 Project Structure
+---
 
-```
-spam-detector/
-├── data/               # Dataset (not committed — see data/README.md)
-├── notebooks/          # Jupyter notebooks (EDA, model training)
-├── src/                # Reusable Python code (preprocessing, etc.)
-├── models/             # Saved trained models
-├── app/                # Streamlit app (Week 3)
-├── images/             # Screenshots / plots for the README
-├── requirements.txt
-└── README.md
-```
+## 🔍 Project Approach
 
-## 🔬 Approach
+### 1. Data Cleaning
 
-1. **Data cleaning** — lowercasing, removing punctuation/numbers/extra spaces
-2. **Feature extraction** — TF-IDF vectorization
-3. **Modelling** — Multinomial Naive Bayes (baseline), then Logistic Regression and SVM
-4. **Evaluation** — Precision, Recall, F1-score, Confusion Matrix
-5. **Deployment** — Streamlit app for real-time prediction
+The SMS messages were cleaned by:
 
-## 📈 Results
+- Converting text to lowercase
+- Removing unnecessary punctuation and characters
+- Removing duplicate cleaned messages
 
-<!-- Fill this in after Week 2 -->
+### 2. Feature Extraction
 
-| Model                | Accuracy | Precision (Spam) | Recall (Spam) | F1 (Spam) |
-|----------------------|----------|------------------|---------------|-----------|
-| Naive Bayes          |          |                  |               |           |
-| Logistic Regression  |          |                  |               |           |
-| SVM                  |          |                  |               |           |
+**TF-IDF (Term Frequency–Inverse Document Frequency)** was used to convert text messages into numerical features that machine learning models can understand.
 
-## 🚀 How to Run
+The final tuned model used:
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/<your-username>/spam-detector.git
-cd spam-detector
+- Maximum features: **5,000**
+- N-gram range: **(1, 2)**
 
-# 2. Create a virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate        # On Windows: venv\Scripts\activate
+This means the model considered both individual words and pairs of words.
 
-# 3. Install dependencies
-pip install -r requirements.txt
+### 3. Model Comparison
 
-# 4. Download the dataset and place spam.csv inside data/ (see data/README.md)
+Three machine learning models were compared:
 
-# 5. Run the notebooks in notebooks/ (or, after Week 3, launch the app)
-streamlit run app/app.py
-```
+1. Multinomial Naive Bayes
+2. Logistic Regression
+3. Linear Support Vector Machine (SVM)
 
-## 💡 What I Learned
+### 4. Evaluation
 
-<!-- Fill this in at the end: 3-4 honest bullet points -->
+The models were evaluated using:
 
--
--
--
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
+- 5-fold Cross-Validation
 
-## 🔮 Future Improvements
+F1-score was given importance because the dataset is imbalanced and both false positives and false negatives matter in spam detection.
 
-- Try word embeddings or a small deep learning model
-- Hyperparameter tuning with GridSearchCV
-- Deploy the app on Streamlit Community Cloud
-- Extend to fake-news detection
+### 5. Hyperparameter Tuning
 
-## 👤 Author
+GridSearchCV was used to tune the Linear SVM model.
 
-**Your Name** — 3rd Semester, B.E./B.Tech (AIML)
-[GitHub](https://github.com/<your-username>) · [LinkedIn](https://linkedin.com/in/<your-profile>)
+The best parameters found were:
+
+```text
+C = 10
+TF-IDF max_features = 5000
+TF-IDF ngram_range = (1, 2)
