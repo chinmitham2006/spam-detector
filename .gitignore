@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.env
+
+# Data (don't commit raw datasets)
+data/*.csv
+data/*.zip
+
+# OS
+.DS_Store
