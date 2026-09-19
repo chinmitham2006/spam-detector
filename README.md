@@ -1,5 +1,6 @@
 # 📩 SMS Spam Detector
-
+live demo!!
+https://spam-detector-6vr22ygmfacvwx2vfsnfys.streamlit.app/
 A machine learning project that classifies SMS messages as **Spam** or **Ham (Not Spam)** using TF-IDF features and classical machine learning models, with a Streamlit web application for real-time predictions.
 
 **Status: Completed ✅**
